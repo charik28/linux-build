@@ -1,0 +1,10 @@
+Acquire::http::Proxy "http://localhost:3142";
+
+
+
+
+
+
+
+
+scp linux-5.19.tar.xz user@172.16.6.13:/home/user/linux-5.19.tar.xz

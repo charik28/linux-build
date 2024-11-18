@@ -1,0 +1,17 @@
+ref : https://www.kernel.org/doc/html/v4.13/dev-tools/kselftest.html
+Running the selftests
+
+To build the tests:
+
+$ 
+make -C tools/testing/selftests
+
+To run the tests:
+
+make -C tools/testing/selftests run_tests
+
+To build and run the tests with a single command, use:
+
+make kselftest
+
+
