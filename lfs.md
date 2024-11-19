@@ -2,6 +2,8 @@
 ssh user@172.16.4.84
 user
 
+
+
 # 5.3.1. Installation de GCC croisé 
 
 #wget mpfr,gmp,mpc

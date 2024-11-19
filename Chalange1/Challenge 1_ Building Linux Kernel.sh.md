@@ -1,4 +1,4 @@
-
+![IMG20241117094030.jpg](IMG20241117094030.jpg)
 new ubunto server
 
 ssh user@172.16.6.13
@@ -10,7 +10,7 @@ git clone --depth=1 --branch v6.8 https://git.kernel.org/pub/scm/linux/kernel/gi
 sudo apt-get install build-essential libncurses-dev bison flex libssl-dev libelf-dev
 
 #Configure the Kernel:
-
+![Capture d’écran du 2024-11-18 15-01-16.png](Capture%20d%E2%80%99%C3%A9cran%20du%202024-11-18%2015-01-16.png)
 #configuration tools:
 make menuconfig  # Text-based menu
 
