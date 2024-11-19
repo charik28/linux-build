@@ -1,73 +1,92 @@
-![IMG20241117094030.jpg](IMG20241117094030.jpg)
-new ubunto server
+# Nouveau serveur Ubuntu
 
+## Connexion SSH
+```bash
 ssh user@172.16.6.13
-pass is user
-#Get the src :
+```
+
+
+Le mot de passe est `user`.
+
+## Obtenir le code source :
+```bash
 git clone --depth=1 --branch v6.8 https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+```
 
-#Install Required Packages:
+## Installer les paquets requis :
+```bash
 sudo apt-get install build-essential libncurses-dev bison flex libssl-dev libelf-dev
+```
 
-#Configure the Kernel:
-![Capture d’écran du 2024-11-18 15-01-16.png](Capture%20d%E2%80%99%C3%A9cran%20du%202024-11-18%2015-01-16.png)
-#configuration tools:
-make menuconfig  # Text-based menu
+## Configurer le noyau :
+### Outils de configuration :
+```bash
+make menuconfig  # Menu basé sur texte
+```
+![menuconfig.png](menuconfig.png)
+Voici la documentation reformattée en français :
 
-#Step 4: Compile the Kernel
- 
- 
-# image on th phone
+## Étape 4 : Compiler le noyau
 
-#Step 4: Compile the Kernel
+```bash
 make -j$(nproc)
+```
 
-#Install the Modules:
+## Installer les modules :
+
+```bash
 sudo make modules_install
+```
 
-Install the Kernel:
-bash
+## Installer le noyau :
 
+```bash
 sudo make install
+```
 
-## Step 5: Update Bootloader
+## Étape 5 : Mettre à jour le chargeur de démarrage
 
-   # Update GRUB (if using GRUB):
+### Mettre à jour GRUB :
+
+```bash
 sudo update-grub
+```
 
-#Step 6: Testing the Kernel
+## Étape 6 : Tester le noyau
 
-#Reboot the System:
-#    Restart your machine and select the new kernel from the boot menu.
+### Redémarrer le système :
 
+Redémarrez votre machine et sélectionnez le nouveau noyau dans le menu de démarrage.
+![vlcsnap-2024-11-19-06h07m28s385.png](vlcsnap-2024-11-19-06h07m28s385.png)
+[VID20241118001810.mp4](VID20241118001810.mp4)
 
+## Étape 7 : Configurer un cadre de test
 
-#Step 7: Set Up a Testing Framework
+### Installer les outils de test :
 
+Installez `kselftest` et `LTP` :
 
-Install Testing Tools:
+```bash
+sudo apt-get install linux-tools-common linux-tools-$(uname -r)
+sudo apt-get install ltp
+```
 
-    Install kselftest and LTP:
-    bash
+### Exécuter les tests automatiques du noyau :
 
-    sudo apt-get install linux-tools-common linux-tools-$(uname -r)
-    sudo apt-get install ltp
+```bash
+make kselftest
+```
 
-Run Kernel Self-Tests:
+Vérifiez les résultats dans `output.log` ou le fichier journal spécifié.
 
-    Execute:
-    bash
+### Exécuter le Linux Test Project (LTP) :
 
-    make kselftest
+Naviguez vers le répertoire LTP et exécutez :
 
-    Check results in output.log or the specified log file.
-
-Run Linux Test Project (LTP):
-
-    Navigate to the LTP directory and execute:
-    bash
-
+```bash
 cd /path/to/ltp
 ./runltp
-
-
+```
+![selfTest (1).png](selftests%2FselfTest%20%281%29.png)
+![selfTest (2).png](selftests%2FselfTest%20%282%29.png)
+![selfTest (3).png](selftests%2FselfTest%20%283%29.png)
