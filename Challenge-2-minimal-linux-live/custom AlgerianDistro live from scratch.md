@@ -1,4 +1,4 @@
-# How to create a custom Ubuntu live from scratch
+# How to create a custom AlgerianDistro live from scratch
   
  
  
@@ -12,10 +12,26 @@ sudo apt-get install \
 ```
 
 ```shell
-mkdir $HOME/live-ubuntu-from-scratch
+mkdir $HOME/minimal-linux-live
 ```
 
-## Bootstrap and Configure Ubuntu
+
+## Étape 3 : Bootstrap le système de base
+
+### Pour l'architecture x86
+
+```bash
+sudo debootstrap --arch amd64 focal ./rootfs http://192.168.8.149:3142/dz.archive.ubuntu.com/ubuntu/
+```
+
+### Pour l'architecture ARM
+
+```bash
+sudo debootstrap --arch armhf focal ./rootfs http://192.168.8.149:3142/dz.archive.ubuntu.com/ubuntu/
+```
+
+
+## Bootstrap and Configure AlgerianDistro
 
 `debootstrap` is a program for generating OS images.  We install it into our `build system` to begin generating our ISO.
 
@@ -26,8 +42,8 @@ mkdir $HOME/live-ubuntu-from-scratch
      --arch=amd64 \
      --variant=minbase \
      noble \
-     $HOME/live-ubuntu-from-scratch/chroot \
-     http://dz.archive.ubuntu.com/ubuntu/
+     $HOME/minimal-linux-live/chroot \
+     http://192.168.8.149:3142/dz.archive.ubuntu.com/ubuntu/
   ```
 
   > **debootstrap** is used to create a Debian base system from scratch, without requiring the availability of **dpkg** or **apt**. It does this by downloading .deb files from a mirror site, and carefully unpacking them into a directory which can eventually be **chrooted** into.
@@ -35,9 +51,9 @@ mkdir $HOME/live-ubuntu-from-scratch
 * Configure external mount points
 
   ```shell
-  sudo mount --bind /dev $HOME/live-ubuntu-from-scratch/chroot/dev
+  sudo mount --bind /dev $HOME/minimal-linux-live/chroot/dev
   
-  sudo mount --bind /run $HOME/live-ubuntu-from-scratch/chroot/run
+  sudo mount --bind /run $HOME/minimal-linux-live/chroot/run
   ```
 
   As we will be updating and installing packages (grub among them), these mount points are necessary inside the chroot environment, so we are able to finish the installation without errors.
@@ -53,7 +69,7 @@ From this point we will be configuring the `live system`.
 1. **Access chroot environment**
 
    ```shell
-   sudo chroot $HOME/live-ubuntu-from-scratch/chroot
+   sudo chroot $HOME/minimal-linux-live/chroot
    ```
 
 2. **Configure mount points, home and locale**
@@ -179,47 +195,6 @@ apt-get install -y \
        less
 ```
 
-13. **Install Visual Studio Code (optional)**
-
-    1. Download and install the key
-
-       ```shell
-       curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-
-       install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-
-       echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
-
-       rm microsoft.gpg
-       ```
-
-    2. Then update the package cache and install the package using
-
-       ```shell
-       apt-get update
-
-       apt-get install -y code
-       ```
-
-14. **Install Google Chrome (optional)**
-
-    1. Download and install the key
-
-       ```shell
-       wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
-       echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-       ```
-
-    2. Then update the package cache and install the package using
-
-       ```shell
-       apt-get update
-
-       apt-get install google-chrome-stable
-       ```
-
-
 16. **Remove unused applications (optional)**
 
     ```shell
@@ -326,12 +301,12 @@ We are now back in our `build environment` after setting up our `live system` an
    set default="0"
    set timeout=30
 
-   menuentry "Try Ubuntu FS without installing" {
+   menuentry "Try AlgerianDistro FS without installing" {
       linux /casper/vmlinuz boot=casper nopersistent toram quiet splash ---
       initrd /casper/initrd
    }
 
-   menuentry "Install Ubuntu FS" {
+   menuentry "Install AlgerianDistro FS" {
       linux /casper/vmlinuz boot=casper only-ubiquity quiet splash ---
       initrd /casper/initrd
    }
@@ -446,9 +421,9 @@ We are now back in our `build environment` after setting up our `live system` an
 ## Unbind mount points
 
 ```shell
-sudo umount $HOME/live-ubuntu-from-scratch/chroot/dev
+sudo umount $HOME/minimal-linux-live/chroot/dev
 
-sudo umount $HOME/live-ubuntu-from-scratch/chroot/run
+sudo umount $HOME/minimal-linux-live/chroot/run
 ```
 
 ## Compress the chroot
@@ -458,7 +433,7 @@ After everything has been installed and preconfigured in the **chrooted** enviro
 1. Access build directory
 
    ```shell
-   cd $HOME/live-ubuntu-from-scratch
+   cd $HOME/minimal-linux-live
    ```
 
 2. Move image artifacts
@@ -496,7 +471,7 @@ After everything has been installed and preconfigured in the **chrooted** enviro
 1. Access build directory
 
    ```shell
-   cd $HOME/live-ubuntu-from-scratch/image
+   cd $HOME/minimal-linux-live/image
    ```
 
 2. Create iso from the image directory using the command-line
@@ -507,8 +482,8 @@ After everything has been installed and preconfigured in the **chrooted** enviro
       -iso-level 3 \
       -full-iso9660-filenames \
       -J -J -joliet-long \
-      -volid "Ubuntu from scratch" \
-      -output "../ubuntu-from-scratch.iso" \
+      -volid "AlgerianDistro from scratch" \
+      -output "../minimal-linux-live.iso" \
       -eltorito-boot isolinux/bios.img \
         -no-emul-boot \
         -boot-load-size 4 \
@@ -561,13 +536,13 @@ After everything has been installed and preconfigured in the **chrooted** enviro
    MENU COLOR tabmsg       31;40   #30ffffff #00000000 std
 
    LABEL linux
-    MENU LABEL Try Ubuntu FS
+    MENU LABEL Try AlgerianDistro FS
     MENU DEFAULT
     KERNEL /casper/vmlinuz
     APPEND initrd=/casper/initrd boot=casper
 
    LABEL linux
-    MENU LABEL Try Ubuntu FS (nomodeset)
+    MENU LABEL Try AlgerianDistro FS (nomodeset)
     MENU DEFAULT
     KERNEL /casper/vmlinuz
     APPEND initrd=/casper/initrd boot=casper nomodeset
@@ -585,7 +560,7 @@ After everything has been installed and preconfigured in the **chrooted** enviro
 3. Access build directory
 
    ```shell
-   cd $HOME/live-ubuntu-from-scratch/image
+   cd $HOME/minimal-linux-live/image
    ```
 
 4. Create iso from the image directory
@@ -596,8 +571,8 @@ After everything has been installed and preconfigured in the **chrooted** enviro
       -iso-level 3 \
       -full-iso9660-filenames \
       -J -J -joliet-long \
-      -volid "Ubuntu from scratch" \
-      -output "../ubuntu-from-scratch.iso" \
+      -volid "AlgerianDistro from scratch" \
+      -output "../minimal-linux-live.iso" \
     -isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin \
     -eltorito-boot \
         isolinux/isolinux.bin \
@@ -610,7 +585,7 @@ After everything has been installed and preconfigured in the **chrooted** enviro
         -no-emul-boot \
         -isohybrid-gpt-basdat \
     -append_partition 2 0xef EFI/boot/efiboot.img \
-      "$HOME/live-ubuntu-from-scratch/image"
+      "$HOME/minimal-linux-live/image"
    ```
 
 ## Make a bootable USB image
@@ -620,7 +595,7 @@ It is simple and easy, using "dd"
 
 ![img_1.png](..%2Fubunto%2Fimg_1.png)
 ```shell
-sudo dd if=ubuntu-from-scratch.iso of=<device> status=progress oflag=sync
+sudo dd if=minimal-linux-live.iso of=<device> status=progress oflag=sync
 ```
 
  ![iso.png](iso.png)

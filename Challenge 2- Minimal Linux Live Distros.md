@@ -25,24 +25,6 @@ mkdir ~/minimal-live-distro
 cd ~/minimal-live-distro
 ```
 
-## Étape 3 : Bootstrap le système de base
-
-### Pour l'architecture x86
-
-Exécutez la commande suivante pour créer un système de base Ubuntu minimal :
-
-```bash
-sudo debootstrap --arch amd64 focal ./rootfs http://archive.ubuntu.com/ubuntu/
-```
-
-### Pour l'architecture ARM
-
-Si vous construisez pour ARM, utilisez :
-
-```bash
-sudo debootstrap --arch armhf focal ./rootfs http://archive.ubuntu.com/ubuntu/
-```
-
 ## Étape 4 : Chroot dans le nouvel environnement
 
 Changez de racine dans l'environnement nouvellement créé :
