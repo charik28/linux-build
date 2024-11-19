@@ -178,7 +178,54 @@ From this point we will be configuring the `live system`.
    ```  
 
  
-12. **Install useful applications**
+12. **Install some useful applications**
+   **Install Visual Studio Code (optional)**
+
+    1. Download and install the key
+
+       ```shell
+       curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+
+       install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
+
+       echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
+
+       rm microsoft.gpg
+       ```
+
+    2. Then update the package cache and install the package using
+
+       ```shell
+       apt-get update
+
+       apt-get install -y code
+       ```
+
+14. **Install Google Chrome **
+
+    1. Download and install the key
+
+       ```shell
+       wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+       echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+       ```
+
+    2. Then update the package cache and install the package using
+
+       ```shell
+       apt-get update
+
+       apt-get install google-chrome-stable
+       ```
+
+15. **Install Java JDK 8**
+
+    ```shell
+    apt-get install -y \
+        openjdk-8-jdk \
+        openjdk-8-jre
+    ```
 
 ```shell
    apt-get install -y python3
