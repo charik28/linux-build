@@ -91,7 +91,7 @@ From this point we will be configuring the `live system`.
 3. **Set a custom hostname**
 
    ```shell
-   echo "ubuntu-fs-live" > /etc/hostname
+   echo "algerian-distro-fs-live" > /etc/hostname
    ```
 
 4. **Configure apt sources.list**
@@ -181,7 +181,7 @@ From this point we will be configuring the `live system`.
 12. **Install useful applications**
 
 ```shell
-   apt-get install -y gcc python openjdk-8-jdk
+   apt-get install -y python3
 ```
 
 ```shell

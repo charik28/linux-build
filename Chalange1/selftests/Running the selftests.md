@@ -1,17 +1,19 @@
-ref : https://www.kernel.org/doc/html/v4.13/dev-tools/kselftest.html
-Running the selftests
+# Running the Selftests
 
-To build the tests:
+To build the tests, use the following command:
 
-$ 
+```bash
 make -C tools/testing/selftests
+```
 
-To run the tests:
+To run the tests, execute:
 
+```bash
 make -C tools/testing/selftests run_tests
+```
 
 To build and run the tests with a single command, use:
 
+```bash
 make kselftest
-
-
+```

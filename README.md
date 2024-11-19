@@ -14,10 +14,16 @@ Le CNTSID a besoin d'une distribution personnalisée qui réponde à nos besoins
 **Objective:** Obtenir les sources de Kali et les compiler.  
 **Outcome:** Nous avons réussi à compléter ce défi, ce qui nous a permis de comprendre les fondamentaux de la distribution Kali et d'apprendre à compiler des sources de manière efficace.
 
-### [custom AlgerianDistro live from scratch.md](Challenge-2-minimal-linux-live%2Fcustom%20AlgerianDistro%20live%20from%20scratch.md)
+[Running the selftests.md](Chalange1%2Fselftests%2FRunning%20the%20selftests.md)
+
+
+
+### [Challenge-2custom AlgerianDistro live from scratch](Challenge-2-minimal-linux-live%2Fcustom%20AlgerianDistro%20live%20from%20scratch.md)
 **Objective:**  Distributions Linux Live minimales pour x86/ARM à partir de zéro.  
 **Outcome:** Ce défi a été particulièrement enrichissant, approfondissant nos connaissances sur le fonctionnement interne de Linux. Cependant, nous n'avons pas pu le terminer en raison de complications techniques imprévues.
 
+### Challenge-3 LFS 
+[lfs.md](lfs.md)
 
 ## Participants
 - **Sabrina Houazen**
