@@ -18,8 +18,6 @@ Le CNTSID a besoin d'une distribution personnalisée qui réponde à nos besoins
 **Objective:**  Distributions Linux Live minimales pour x86/ARM à partir de zéro.  
 **Outcome:** Ce défi a été particulièrement enrichissant, approfondissant nos connaissances sur le fonctionnement interne de Linux. Cependant, nous n'avons pas pu le terminer en raison de complications techniques imprévues.
 
-### [Process to Create a Complete Debian Installation of Sid](debian%2FFull%20process%20to%20create%20a%20complete%20Debian%20installation%20of%20sid%20.sh.md)
-**Description:** Ce lien fournit le code source des scripts exécutés durant le hackathon, organisé par l'Université de Saida en collaboration avec le CNLL. Vous y trouverez des instructions détaillées et des informations sur la création d'une installation complète de Debian Sid.
 
 ## Participants
 - **Sabrina Houazen**

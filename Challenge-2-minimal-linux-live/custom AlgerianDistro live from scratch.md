@@ -598,4 +598,4 @@ It is simple and easy, using "dd"
 sudo dd if=minimal-linux-live.iso of=<device> status=progress oflag=sync
 ```
 
- ![iso.png](iso.png)
+![img_4.png](img_4.png)
